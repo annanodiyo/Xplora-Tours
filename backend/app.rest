@@ -1,0 +1,17 @@
+POST http://localhost:4800/user/register
+Content-Type: application/json
+
+{
+    "full_name": "Robin",
+    "email": "Robiin@gmail.com",
+    "phone_number": "0796904954",
+    "password": "123456789"
+}
+
+###
+POST http://localhost:4800/user/login
+
+{
+    "full_name": "Robin",
+    "password": "123456789"
+}
