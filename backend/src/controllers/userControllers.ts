@@ -98,7 +98,7 @@ export const loginUser = async (req: Request, res: Response) => {
       }
 
       const LoginCredentials = user.map((records) => {
-        const { email, password, ...rest } = records;
+        const { phone_number, password, ...rest } = records;
 
         return rest;
       });
@@ -107,7 +107,7 @@ export const loginUser = async (req: Request, res: Response) => {
 
       const token = jwt.sign(
         LoginCredentials[0],
-        process.env.secret as string,
+        process.env.SECRET as string,
         {
           expiresIn: "3600s",
         }
@@ -123,8 +123,6 @@ export const loginUser = async (req: Request, res: Response) => {
       });
     }
   } catch (error) {
-    console.log(error);
-
     return res.json({
       error: error,
     });

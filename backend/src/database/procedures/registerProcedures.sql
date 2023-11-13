@@ -8,8 +8,20 @@ CREATE OR ALTER PROCEDURE registerUser(
 )
 AS
 BEGIN
+    DECLARE @role INT;
 
-    INSERT INTO users(user_id, full_name, email, phone_number,password)
-    VALUES(@user_id, @full_name, @email, @phone_number,@password)
+    IF NOT EXISTS (SELECT 1 FROM users)
+    BEGIN
 
+        SET @role = 1;
+    END
+    ELSE
+    BEGIN
+
+        SET @role = 0;
+    END
+
+    INSERT INTO users(user_id, full_name, email, phone_number, password, role)
+    VALUES(@user_id, @full_name, @email, @phone_number, @password, @role)
 END
+ delete from users

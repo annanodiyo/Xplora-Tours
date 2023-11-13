@@ -2,9 +2,9 @@ POST http://localhost:4800/user/register
 Content-Type: application/json
 
 {
-    "full_name": "Robin",
-    "email": "Robiin@gmail.com",
-    "phone_number": "0796904954",
+    "full_name": "annan",
+    "email": "annan@gmail.com",
+    "phone_number": "0798904954",
     "password": "123456789"
 }
 
@@ -12,6 +12,6 @@ Content-Type: application/json
 POST http://localhost:4800/user/login
 
 {
-    "full_name": "Robin",
+     "email": "annan@gmail.com",
     "password": "123456789"
 }

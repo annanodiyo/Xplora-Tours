@@ -1,7 +1,7 @@
 <!-- <app-navbar></app-navbar> -->
 <div class="w-[98vw] flex justify-center">
   <form
-    [formGroup]="registerForm"
+    [formGroup]="registrationForm"
     (ngSubmit)="registerUser()"
     class="w-[70vw] bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4"
   >
@@ -16,15 +16,38 @@
         placeholder="Full Name"
       />
       <span
-        id="fullname-error"
+        id="fname-error"
         class="text-[12px] text-red-500"
         *ngIf="
-          buttonClicked && registerForm?.get('full_name')?.hasError('required')
+          buttonClicked &&
+          registrationForm?.get('full_name')?.hasError('required')
         "
         >*Required</span
       >
     </div>
-
+    <div class="mb-4">
+      <label
+        class="block text-gray-700 text-sm font-bold mb-2"
+        for="phone_number"
+      >
+        Phone Number
+      </label>
+      <input
+        class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+        formControlName="phone_number"
+        type="text"
+        placeholder="+234 70000000"
+      />
+      <span
+        id="phone-error"
+        class="text-[12px] text-red-500"
+        *ngIf="
+          buttonClicked &&
+          registrationForm?.get('phone_number')?.hasError('required')
+        "
+        >*Required</span
+      >
+    </div>
     <div class="mb-4">
       <label class="block text-gray-700 text-sm font-bold mb-2" for="email">
         Email address
@@ -38,7 +61,7 @@
       <span
         class="text-[12px] text-red-500"
         *ngIf="
-          buttonClicked && registerForm?.get('email')?.hasError('required')
+          buttonClicked && registrationForm?.get('email')?.hasError('required')
         "
       >
         *Required
@@ -58,7 +81,8 @@
         id="password-error"
         class="text-[12px] text-red-500"
         *ngIf="
-          buttonClicked && registerForm?.get('password')?.hasError('required')
+          buttonClicked &&
+          registrationForm?.get('password')?.hasError('required')
         "
         >*Required</span
       >
@@ -89,7 +113,7 @@
         Already registered?
         <a
           class="inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-800"
-          href="#"
+          href="../login/login.component.html"
           >LogIn
         </a>
       </p>
