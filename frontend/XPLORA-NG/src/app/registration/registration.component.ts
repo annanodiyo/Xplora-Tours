@@ -32,6 +32,16 @@ export class RegistrationComponent {
       console.log('user registered:', registeredUser);
     } else {
       console.log('Form is invalid. Please fill in all reqired fields');
+      // alert('Form is invalid. Please fill in all reqired fields');
     }
+
+    //   if (this.registrationForm.valid) {
+    //     let registeredUser: userDetails = this.registrationForm.value;
+    //     this.authService.registerUser(() => {
+    //       console.log('user registered:', registeredUser);
+    //     });
+    //   } else {
+    //     console.log('Form is invalid. Please fill in all reqired fields');
+    //   }
   }
 }

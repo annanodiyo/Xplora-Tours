@@ -1,9 +1,15 @@
-<!-- <app-navbar></app-navbar> -->
-<div class="w-[98vw] flex justify-center">
+<app-navbar></app-navbar>
+<div class="w-[80vw] flex justify-center px-20">
+  <div>
+    <img
+      src="https://cdn.pixabay.com/photo/2012/05/07/12/58/giraffe-48386_640.png"
+      alt=""
+    />
+  </div>
   <form
     [formGroup]="registrationForm"
     (ngSubmit)="registerUser()"
-    class="w-[70vw] bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4"
+    class="w-[60vw] bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4"
   >
     <div class="mb-4">
       <label class="block text-gray-700 text-sm font-bold mb-2" for="full name">
@@ -102,9 +108,9 @@
       />
       <span id="password-error" class="text-[12px] text-red-500"></span>
     </div> -->
-    <div class="flex items-center justify-between">
+    <div class="flex items-center justify-between mt-10">
       <button
-        class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+        class="bg-orange-500 hover:bg-orange-200 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
         type="submit"
       >
         Create Account
@@ -112,8 +118,8 @@
       <p>
         Already registered?
         <a
-          class="inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-800"
-          href="../login/login.component.html"
+          routerLink="/login"
+          class="inline-block align-baseline font-bold text-sm text-orange-500 hover:text-orange-500"
           >LogIn
         </a>
       </p>

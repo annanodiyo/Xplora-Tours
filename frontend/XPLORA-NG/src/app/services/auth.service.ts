@@ -7,6 +7,7 @@ import { userDetails } from '../interfaces/user-interface';
 })
 export class AuthService {
   constructor(private http: HttpClient) {}
+
   registerUser(user: userDetails) {
     this.http
       .post('http://localhost:4800/user/register', user)

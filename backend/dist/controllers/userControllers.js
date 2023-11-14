@@ -85,46 +85,28 @@ const getAllUsers = (req, res) => __awaiter(void 0, void 0, void 0, function* ()
 });
 exports.getAllUsers = getAllUsers;
 const loginUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    var _a, _b;
     try {
         const { email, password } = req.body;
         const pool = yield mssql_1.default.connect(sqlConfig_1.sqlConfig);
-        let user = yield (yield pool
+        const user = yield pool
             .request()
             .input("email", email)
             .input("password", password)
-            .execute("loginUser")).recordset;
-        if (((_a = user[0]) === null || _a === void 0 ? void 0 : _a.email) == email) {
-            const CorrectPwd = yield bcrypt_1.default.compare(password, (_b = user[0]) === null || _b === void 0 ? void 0 : _b.password);
-            if (!CorrectPwd) {
-                return res.status(401).json({
-                    error: "Incorrect password",
-                });
-            }
-            const LoginCredentials = user.map((records) => {
-                const { email, password } = records, rest = __rest(records, ["email", "password"]);
-                return rest;
-            });
-            console.log(LoginCredentials);
-            const token = jsonwebtoken_1.default.sign(LoginCredentials[0], process.env.secret, {
-                expiresIn: "3600s",
-            });
-            return res.status(200).json({
-                message: "Logged in successfully",
-                token,
-            });
+            .execute("loginUser");
+        if (!user.recordset.length) {
+            return res.status(401).json({ error: "Invalid credentials" });
         }
-        else {
-            return res.json({
-                error: "Email not found",
-            });
+        const _a = user.recordset[0], { password: storedPassword, phone_number } = _a, rest = __rest(_a, ["password", "phone_number"]);
+        const correctPwd = yield bcrypt_1.default.compare(password, storedPassword);
+        if (!correctPwd) {
+            return res.status(401).json({ error: "Invalid credentials" });
         }
+        const token = jsonwebtoken_1.default.sign(rest, process.env.secret), { expiresIn: , "3600s":  };
+        return res.status(200).json({ message: "LogIn successful" });
     }
     catch (error) {
-        console.log(error);
-        return res.json({
-            error: error,
-        });
+        console.error(error);
+        return res.status(500).json({ error: "server error" });
     }
 });
 exports.loginUser = loginUser;

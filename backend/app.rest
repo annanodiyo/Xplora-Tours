@@ -3,15 +3,16 @@ Content-Type: application/json
 
 {
     "full_name": "annan",
-    "email": "annan@gmail.com",
-    "phone_number": "0798904954",
+    "email": "annan7@gmail.com",
+    "phone_number": "0719904954",
     "password": "123456789"
 }
 
 ###
-POST http://localhost:4800/user/login
+POST http://localhost:3800/user/login
+Content-Type: application/json
 
 {
-     "email": "annan@gmail.com",
+     "email": "josh@gmail.com",
     "password": "123456789"
 }

@@ -38,7 +38,7 @@ app.use((0, express_1.json)());
 //   });
 // });
 app.use("/user", userRouters_1.default);
-app.listen(4800, () => {
-    console.log("server is running on 4800");
+app.listen(3800, () => {
+    console.log("server is running on 3800");
     (0, sqlConfig_1.testSqlConnection)();
 });

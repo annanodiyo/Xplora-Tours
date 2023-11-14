@@ -12,7 +12,7 @@ app.use(json());
 // });
 app.use("/user", user_router);
 
-app.listen(4800, () => {
-  console.log("server is running on 4800");
+app.listen(3800, () => {
+  console.log("server is running on 3800");
   testSqlConnection();
 });

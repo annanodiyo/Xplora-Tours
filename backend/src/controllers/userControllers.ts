@@ -73,58 +73,31 @@ export const getAllUsers = async (req: ExtendedUser, res: Response) => {
     });
   }
 };
-
 export const loginUser = async (req: Request, res: Response) => {
   try {
     const { email, password } = req.body;
-
     const pool = await mssql.connect(sqlConfig);
-
-    let user = await (
-      await pool
-        .request()
-        .input("email", email)
-        .input("password", password)
-        .execute("loginUser")
-    ).recordset;
-
-    if (user[0]?.email == email) {
-      const CorrectPwd = await bcrypt.compare(password, user[0]?.password);
-
-      if (!CorrectPwd) {
-        return res.status(401).json({
-          error: "Incorrect password",
-        });
-      }
-
-      const LoginCredentials = user.map((records) => {
-        const { phone_number, password, ...rest } = records;
-
-        return rest;
-      });
-
-      console.log(LoginCredentials);
-
-      const token = jwt.sign(
-        LoginCredentials[0],
-        process.env.SECRET as string,
-        {
-          expiresIn: "3600s",
-        }
-      );
-
-      return res.status(200).json({
-        message: "Logged in successfully",
-        token,
-      });
-    } else {
-      return res.json({
-        error: "Email not found",
-      });
+    const user = await pool
+      .request()
+      .input("email", email)
+      .input("password", password)
+      .execute("loginUser");
+    if (!user.recordset.length) {
+      return res.status(401).json({ error: "Invalid credentials" });
     }
+    const {
+      password: storedPassword,
+      phone_number,
+      ...rest
+    } = user.recordset[0];
+    const correctPwd = await bcrypt.compare(password, storedPassword);
+    if (!correctPwd) {
+      return res.status(401).json({ error: "Invalid credentials" });
+    }
+    const token = jwt.sign(rest, process.env.secret as string),{expiresIn:"3600s"};
+    return res.status(200).json({message:"LogIn successful"})
   } catch (error) {
-    return res.json({
-      error: error,
-    });
+    console.error(error)
+    return res.status(500).json({error:"server error"})
   }
 };
