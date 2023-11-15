@@ -6,3 +6,9 @@ export const registerUserSchema = Joi.object({
   phone_number: Joi.string().min(10),
   password: Joi.string(),
 });
+
+export const reviewSchema = Joi.object({
+  rating: Joi.number(),
+  comment: Joi.string(),
+  user_id: Joi.string(),
+});

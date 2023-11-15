@@ -94,10 +94,12 @@ export const loginUser = async (req: Request, res: Response) => {
     if (!correctPwd) {
       return res.status(401).json({ error: "Invalid credentials" });
     }
-    const token = jwt.sign(rest, process.env.secret as string),{expiresIn:"3600s"};
-    return res.status(200).json({message:"LogIn successful"})
+    const token = jwt.sign(rest, process.env.secret as string, {
+      expiresIn: "3600s",
+    });
+    return res.status(200).json({ message: "LogIn successful" });
   } catch (error) {
-    console.error(error)
-    return res.status(500).json({error:"server error"})
+    console.error(error);
+    return res.status(500).json({ error: "server error" });
   }
 };

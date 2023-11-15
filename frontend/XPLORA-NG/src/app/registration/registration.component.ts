@@ -28,6 +28,7 @@ export class RegistrationComponent {
 
     if (this.registrationForm.valid) {
       let registeredUser: userDetails = this.registrationForm.value;
+
       this.authService.registerUser(registeredUser);
       console.log('user registered:', registeredUser);
     } else {

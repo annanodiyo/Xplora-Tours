@@ -16,3 +16,14 @@ Content-Type: application/json
      "email": "josh@gmail.com",
     "password": "123456789"
 }
+
+###
+POST http://localhost:3800/review/createReview
+Content-Type: application/json
+
+{
+    "rating":4,
+     "comment":"20",
+    "user_id":"3df35b30-d022-411c-b7ef-fafc4d5d14a6"
+
+}

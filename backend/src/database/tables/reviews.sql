@@ -6,3 +6,4 @@ CREATE TABLE reviews (
     created_at datetime default CURRENT_TIMESTAMP,
     FOREIGN KEY (user_id) REFERENCES users(user_id)
 );
+SELECT * from reviews
