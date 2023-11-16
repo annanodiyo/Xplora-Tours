@@ -1,4 +1,4 @@
-import { Request, Response } from "express";
+import { Request, Response, request } from "express";
 import mssql from "mssql";
 import { v4 } from "uuid";
 import bcrypt from "bcrypt";
@@ -77,19 +77,16 @@ export const loginUser = async (req: Request, res: Response) => {
   try {
     const { email, password } = req.body;
     const pool = await mssql.connect(sqlConfig);
-    const user = await pool
+    let user = await pool
       .request()
       .input("email", email)
       .input("password", password)
       .execute("loginUser");
+
     if (!user.recordset.length) {
       return res.status(401).json({ error: "Invalid credentials" });
     }
-    const {
-      password: storedPassword,
-      phone_number,
-      ...rest
-    } = user.recordset[0];
+    const { password: storedPassword, ...rest } = user.recordset[0];
     const correctPwd = await bcrypt.compare(password, storedPassword);
     if (!correctPwd) {
       return res.status(401).json({ error: "Invalid credentials" });
@@ -97,9 +94,23 @@ export const loginUser = async (req: Request, res: Response) => {
     const token = jwt.sign(rest, process.env.secret as string, {
       expiresIn: "3600s",
     });
-    return res.status(200).json({ message: "LogIn successful" });
+    console.log(token);
+
+    return res.status(200).json({ message: "LogIn successful", token });
   } catch (error) {
     console.error(error);
     return res.status(500).json({ error: "server error" });
+  }
+};
+export const checkUserCredentials = async (
+  req: ExtendedUser,
+  res: Response
+) => {
+  console.log(req.information);
+
+  if (req.information) {
+    return res.json({
+      information: req.information,
+    });
   }
 };

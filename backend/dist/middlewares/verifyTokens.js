@@ -4,20 +4,24 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.verifyToken = void 0;
-const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 const dotenv_1 = __importDefault(require("dotenv"));
+const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 dotenv_1.default.config();
-const verifyToken = (res, req, next) => {
+const verifyToken = (req, res, next) => {
     try {
-        let token = req.headers["token"];
+        const token = req.headers["token"];
         if (!token) {
-            res.status(404).json({ message: "access denied" });
+            return res.status(404).json({
+                message: "You do not have access",
+            });
         }
-        const data = jsonwebtoken_1.default.verify(token, process.env.secret);
-        req.information = data;
+        const data = jsonwebtoken_1.default.verify(token, process.env.SECRET);
+        req.info = data;
     }
     catch (error) {
-        console.log(error);
+        return res.json({
+            message: error,
+        });
     }
     next();
 };

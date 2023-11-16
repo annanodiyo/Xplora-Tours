@@ -27,3 +27,10 @@ Content-Type: application/json
     "user_id":"3df35b30-d022-411c-b7ef-fafc4d5d14a6"
 
 }
+
+###
+GET http://localhost:3800/user/getAllUsers
+Content-Type: application/json
+{
+
+}

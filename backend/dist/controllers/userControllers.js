@@ -23,7 +23,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.loginUser = exports.getAllUsers = exports.registerUser = void 0;
+exports.checkUserCredentials = exports.loginUser = exports.getAllUsers = exports.registerUser = void 0;
 const mssql_1 = __importDefault(require("mssql"));
 const uuid_1 = require("uuid");
 const bcrypt_1 = __importDefault(require("bcrypt"));
@@ -88,7 +88,7 @@ const loginUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const { email, password } = req.body;
         const pool = yield mssql_1.default.connect(sqlConfig_1.sqlConfig);
-        const user = yield pool
+        let user = yield pool
             .request()
             .input("email", email)
             .input("password", password)
@@ -96,7 +96,7 @@ const loginUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         if (!user.recordset.length) {
             return res.status(401).json({ error: "Invalid credentials" });
         }
-        const _a = user.recordset[0], { password: storedPassword, phone_number } = _a, rest = __rest(_a, ["password", "phone_number"]);
+        const _a = user.recordset[0], { password: storedPassword } = _a, rest = __rest(_a, ["password"]);
         const correctPwd = yield bcrypt_1.default.compare(password, storedPassword);
         if (!correctPwd) {
             return res.status(401).json({ error: "Invalid credentials" });
@@ -104,7 +104,8 @@ const loginUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         const token = jsonwebtoken_1.default.sign(rest, process.env.secret, {
             expiresIn: "3600s",
         });
-        return res.status(200).json({ message: "LogIn successful" });
+        console.log(token);
+        return res.status(200).json({ message: "LogIn successful", token });
     }
     catch (error) {
         console.error(error);
@@ -112,3 +113,12 @@ const loginUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     }
 });
 exports.loginUser = loginUser;
+const checkUserCredentials = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    console.log(req.information);
+    if (req.information) {
+        return res.json({
+            information: req.information,
+        });
+    }
+});
+exports.checkUserCredentials = checkUserCredentials;
