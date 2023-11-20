@@ -23,7 +23,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.checkUserCredentials = exports.loginUser = exports.getAllUsers = exports.registerUser = void 0;
+exports.deleteUser = exports.checkUserCredentials = exports.loginUser = exports.getAllUsers = exports.registerUser = void 0;
 const mssql_1 = __importDefault(require("mssql"));
 const uuid_1 = require("uuid");
 const bcrypt_1 = __importDefault(require("bcrypt"));
@@ -87,6 +87,7 @@ exports.getAllUsers = getAllUsers;
 const loginUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const { email, password } = req.body;
+        // console.log(req.body);
         const pool = yield mssql_1.default.connect(sqlConfig_1.sqlConfig);
         let user = yield pool
             .request()
@@ -114,11 +115,36 @@ const loginUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
 });
 exports.loginUser = loginUser;
 const checkUserCredentials = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    console.log(req.information);
-    if (req.information) {
+    console.log(req.info);
+    if (req.info) {
         return res.json({
-            information: req.information,
+            information: req.info,
         });
     }
 });
 exports.checkUserCredentials = checkUserCredentials;
+const deleteUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        let { user_id } = req.params;
+        // console.log(req);
+        const pool = yield mssql_1.default.connect(sqlConfig_1.sqlConfig);
+        const user = yield pool
+            .request()
+            .input("user_id", user_id)
+            .execute("deleteUser");
+        const rowsAffected = user.rowsAffected[0];
+        if (rowsAffected > 0) {
+            return res
+                .status(200)
+                .json({ message: "Deleted successfully", rowsAffected });
+        }
+        else {
+            return res.status(404).json({ error: "No user found to delete" });
+        }
+    }
+    catch (error) {
+        console.error(error);
+        return res.status(202).json({ error: "request failed" });
+    }
+});
+exports.deleteUser = deleteUser;

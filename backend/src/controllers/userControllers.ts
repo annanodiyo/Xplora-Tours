@@ -1,4 +1,4 @@
-import { Request, Response, request } from "express";
+import { NextFunction, Request, Response, request } from "express";
 import mssql from "mssql";
 import { v4 } from "uuid";
 import bcrypt from "bcrypt";
@@ -58,6 +58,7 @@ export const registerUser = async (req: Request, res: Response) => {
     console.log(error);
   }
 };
+
 export const getAllUsers = async (req: ExtendedUser, res: Response) => {
   try {
     const pool = await mssql.connect(sqlConfig);
@@ -73,9 +74,13 @@ export const getAllUsers = async (req: ExtendedUser, res: Response) => {
     });
   }
 };
+
 export const loginUser = async (req: Request, res: Response) => {
   try {
     const { email, password } = req.body;
+
+    // console.log(req.body);
+
     const pool = await mssql.connect(sqlConfig);
     let user = await pool
       .request()
@@ -102,15 +107,41 @@ export const loginUser = async (req: Request, res: Response) => {
     return res.status(500).json({ error: "server error" });
   }
 };
+
 export const checkUserCredentials = async (
   req: ExtendedUser,
   res: Response
 ) => {
-  console.log(req.information);
+  console.log(req.info);
 
-  if (req.information) {
+  if (req.info) {
     return res.json({
-      information: req.information,
+      information: req.info,
     });
+  }
+};
+
+export const deleteUser = async (req: Request, res: Response) => {
+  try {
+    let { user_id } = req.params;
+    // console.log(req);
+
+    const pool = await mssql.connect(sqlConfig);
+    const user = await pool
+      .request()
+      .input("user_id", user_id)
+      .execute("deleteUser");
+
+    const rowsAffected = user.rowsAffected[0];
+    if (rowsAffected > 0) {
+      return res
+        .status(200)
+        .json({ message: "Deleted successfully", rowsAffected });
+    } else {
+      return res.status(404).json({ error: "No user found to delete" });
+    }
+  } catch (error) {
+    console.error(error);
+    return res.status(202).json({ error: "request failed" });
   }
 };

@@ -31,6 +31,7 @@ const cors_1 = __importDefault(require("cors"));
 const sqlConfig_1 = require("./config/sqlConfig");
 const userRouters_1 = __importDefault(require("./routes/userRouters"));
 const reviewRoutes_1 = __importDefault(require("./routes/reviewRoutes"));
+const eventsRoutes_1 = __importDefault(require("./routes/eventsRoutes"));
 // import {Routes}
 const app = (0, express_1.default)();
 app.use((0, express_1.json)());
@@ -42,6 +43,7 @@ app.use((0, cors_1.default)());
 // });
 app.use("/user", userRouters_1.default);
 app.use("/review", reviewRoutes_1.default);
+app.use("/event", eventsRoutes_1.default);
 app.listen(3800, () => {
     console.log("server is running on 3800");
     (0, sqlConfig_1.testSqlConnection)();

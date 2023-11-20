@@ -12,3 +12,11 @@ export const reviewSchema = Joi.object({
   comment: Joi.string(),
   user_id: Joi.string(),
 });
+
+export const eventsSchema = Joi.object({
+  destination: Joi.string(),
+  description: Joi.string(),
+  duration: Joi.number(),
+  start_date: Joi.date(),
+  price: Joi.number(),
+});

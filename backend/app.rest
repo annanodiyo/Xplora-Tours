@@ -1,11 +1,11 @@
-POST http://localhost:4800/user/register
+POST http://localhost:3800/user/register
 Content-Type: application/json
 
 {
     "full_name": "annan",
-    "email": "annan7@gmail.com",
+    "email": "annan@gmail.com",
     "phone_number": "0719904954",
-    "password": "123456789"
+    "password": "qwerty123"
 }
 
 ###
@@ -13,7 +13,7 @@ POST http://localhost:3800/user/login
 Content-Type: application/json
 
 {
-     "email": "josh@gmail.com",
+     "email": "annan@gmail.com",
     "password": "123456789"
 }
 
@@ -29,8 +29,44 @@ Content-Type: application/json
 }
 
 ###
-GET http://localhost:3800/user/getAllUsers
+GET http://localhost:3800/user/allUsers
 Content-Type: application/json
-{
 
+{}
+
+###
+DELETE http://localhost:3800/user/delete/aa14e4bb-6b5a-4b58-b5a1-7d5812d03676
+
+
+###
+POST http://localhost:3800/event/createEvent
+Content-Type: application/json
+
+{
+  "destination": "mombasa",
+  "description": "ggggggggggggggggggggggg",
+  "duration": 5,
+  "price": 120.00,
+  "start_date": "2023-12-12"
 }
+
+###
+PUT http://localhost:3800/event/updateEvent
+Content-Type: application/json
+
+{
+  "destination": "mombasa",
+  "description": "ggggggggggggggggggggggg",
+  "duration": 5,
+  "price": 120.00,
+  "start_date": "2023-12-12"
+}
+
+###
+delete http://localhost:3800/event/delete/6d92d299-9615-4c43-8a5b-1ecc203df404
+
+###
+GET http://localhost:3800/event/allEvents
+Content-Type: application/json
+
+{}

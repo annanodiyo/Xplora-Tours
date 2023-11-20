@@ -3,3 +3,5 @@ CREATE TABLE bookings (
     event_id VARCHAR(500) ,
     user_id VARCHAR(500) ,
 );
+
+DROP TABLE bookings

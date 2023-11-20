@@ -3,6 +3,7 @@ import cors from "cors";
 import { testSqlConnection } from "./config/sqlConfig";
 import user_router from "./routes/userRouters";
 import review_router from "./routes/reviewRoutes";
+import event_router from "./routes/eventsRoutes";
 // import {Routes}
 
 const app = express();
@@ -15,6 +16,7 @@ app.use(cors());
 // });
 app.use("/user", user_router);
 app.use("/review", review_router);
+app.use("/event", event_router);
 
 app.listen(3800, () => {
   console.log("server is running on 3800");

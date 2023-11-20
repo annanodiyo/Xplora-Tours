@@ -8,17 +8,17 @@ CREATE OR ALTER PROCEDURE registerUser(
 )
 AS
 BEGIN
-    DECLARE @role INT;
+    DECLARE @role VARCHAR(50);
 
     IF NOT EXISTS (SELECT 1 FROM users)
     BEGIN
 
-        SET @role = 1;
+        SET @role = 'Admin';
     END
     ELSE
     BEGIN
 
-        SET @role = 0;
+        SET @role = 'User';
     END
 
     INSERT INTO users(user_id, full_name, email, phone_number, password, role)
