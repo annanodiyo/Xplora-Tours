@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '../services/auth.service';
 import { userDetails } from '../interfaces/user-interface';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-registration',
@@ -11,9 +12,11 @@ import { userDetails } from '../interfaces/user-interface';
 export class RegistrationComponent {
   registrationForm!: FormGroup;
   buttonClicked: boolean = false;
+  showSuccess: boolean = false;
   constructor(
     private authService: AuthService,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private router: Router
   ) {
     this.registrationForm = formBuilder.group({
       email: ['', [Validators.required]],
@@ -24,25 +27,21 @@ export class RegistrationComponent {
   }
   registerUser() {
     this.buttonClicked = true;
-    console.log('happy monday');
+    // console.log('happy monday');
 
     if (this.registrationForm.valid) {
       let registeredUser: userDetails = this.registrationForm.value;
 
       this.authService.registerUser(registeredUser);
+      this.showSuccess = true;
+      setTimeout(() => {
+        this.showSuccess = false;
+        this.router.navigate(['/login']);
+      }, 2000);
       console.log('user registered:', registeredUser);
     } else {
-      console.log('Form is invalid. Please fill in all reqired fields');
+      console.log('Form is invalid. Please fill in all required fields');
       // alert('Form is invalid. Please fill in all reqired fields');
     }
-
-    //   if (this.registrationForm.valid) {
-    //     let registeredUser: userDetails = this.registrationForm.value;
-    //     this.authService.registerUser(() => {
-    //       console.log('user registered:', registeredUser);
-    //     });
-    //   } else {
-    //     console.log('Form is invalid. Please fill in all reqired fields');
-    //   }
   }
 }

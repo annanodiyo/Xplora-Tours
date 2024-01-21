@@ -1,8 +1,11 @@
 /* Example CSS */
 .active-link {
     color: orange;
-    /* Change this to the desired active link color */
     font-weight: bold;
-    /* Optionally make the active link bold */
-    /* Add other styles as needed */
+    border:none;
+}
+.logo{
+    background: -webkit-linear-gradient(#ea580c, #eee);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
 }

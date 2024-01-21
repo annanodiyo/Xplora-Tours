@@ -1,19 +1,23 @@
 <div class="sticky top-0 z-50 px-10 py-4 mb-10 bg-orange-100">
   <nav class="flex justify-between items-center mx-auto">
-    <!-- <div class="px-10">
-      <img
-        src="/assets/xplora-tours-and-travels-high-resolution-logo.png"
-        alt=""
-      />
-    </div> -->
-    <div class="flex space-x-4">
+    <div class="logo w-[7%]">
+      <!-- <p class="logo" style="font-family: 'Fraunces', serif">XPLORA</p> -->
+      <p class="logo text-2xl drop-shadow-lg" style="font-family: 'Fraunces', serif">XPLORA</p>
+
+    </div>
+    <div class="flex space-x-6 w-[70%]">
       <a
         routerLink="/"
-        routerLinkActive="active-link"
+        [routerLinkActive]="['active-link']"
+        [routerLinkActiveOptions]="{ exact: true }"
         class="hover:text-orange-500 font-normal"
         >Home</a
       >
-      <a routerLink="/service" class="hover:text-orange-500 font-normal"
+
+      <a
+        routerLink="/service"
+        routerLinkActive="active-link"
+        class="hover:text-orange-500 font-normal"
         >Service</a
       >
 

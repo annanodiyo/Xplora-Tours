@@ -1,128 +1,154 @@
-<app-navbar></app-navbar>
-<div class="w-[80vw] flex justify-center px-20">
-  <div>
-    <img
-      src="https://cdn.pixabay.com/photo/2012/05/07/12/58/giraffe-48386_640.png"
-      alt=""
-    />
-  </div>
-  <form
-    [formGroup]="registrationForm"
-    (ngSubmit)="registerUser()"
-    class="w-[60vw] bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4"
-  >
-    <div class="mb-4">
-      <label class="block text-gray-700 text-sm font-bold mb-2" for="full name">
-        Full Name
-      </label>
-      <input
-        class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-        formControlName="full_name"
-        type="text"
-        placeholder="Full Name"
+<div class="bg-slate-300 min-h-[100vh]">
+  <app-navbar></app-navbar>
+
+  <div class="w-[60vw] flex justify-center items-center px-20">
+    <div>
+      <img
+        src="https://cdn.pixabay.com/photo/2012/05/07/12/58/giraffe-48386_640.png"
+        alt=""
       />
-      <span
-        id="fname-error"
-        class="text-[12px] text-red-500"
-        *ngIf="
-          buttonClicked &&
-          registrationForm?.get('full_name')?.hasError('required')
-        "
-        >*Required</span
-      >
     </div>
-    <div class="mb-4">
-      <label
-        class="block text-gray-700 text-sm font-bold mb-2"
-        for="phone_number"
-      >
-        Phone Number
-      </label>
-      <input
-        class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-        formControlName="phone_number"
-        type="text"
-        placeholder="+234 70000000"
-      />
-      <span
-        id="phone-error"
-        class="text-[12px] text-red-500"
-        *ngIf="
-          buttonClicked &&
-          registrationForm?.get('phone_number')?.hasError('required')
-        "
-        >*Required</span
-      >
-    </div>
-    <div class="mb-4">
-      <label class="block text-gray-700 text-sm font-bold mb-2" for="email">
-        Email address
-      </label>
-      <input
-        class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-        formControlName="email"
-        type="text"
-        placeholder="Username"
-      />
-      <span
-        class="text-[12px] text-red-500"
-        *ngIf="
-          buttonClicked && registrationForm?.get('email')?.hasError('required')
-        "
-      >
-        *Required
-      </span>
-    </div>
-    <div class="mb-6">
-      <label class="block text-gray-700 text-sm font-bold mb-2" for="password">
-        Password
-      </label>
-      <input
-        class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-        formControlName="password"
-        type="password"
-        placeholder="******************"
-      />
-      <span
-        id="password-error"
-        class="text-[12px] text-red-500"
-        *ngIf="
-          buttonClicked &&
-          registrationForm?.get('password')?.hasError('required')
-        "
-        >*Required</span
-      >
-    </div>
-    <!-- <div class="mb-6">
-      <label
-        class="block text-gray-700 text-sm font-bold mb-2"
-        for="confirm password"
-      >
-        Confirm Password
-      </label>
-      <input
-        class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-        id="login-password"
-        type="password"
-        placeholder="******************"
-      />
-      <span id="password-error" class="text-[12px] text-red-500"></span>
-    </div> -->
-    <div class="flex items-center justify-between mt-10">
-      <button
-        class="bg-orange-500 hover:bg-orange-200 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-        type="submit"
-      >
-        Create Account
-      </button>
-      <p>
-        Already registered?
-        <a
-          routerLink="/login"
-          class="inline-block align-baseline font-bold text-sm text-orange-500 hover:text-orange-500"
-          >LogIn
-        </a>
+
+    <form
+      [formGroup]="registrationForm"
+      (ngSubmit)="registerUser()"
+      class="w-1/3 bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4"
+    >
+      <p class="text-center font-bold">
+        <span
+          class="logo text-2xl drop-shadow-lg"
+          style="font-family: 'Fraunces', serif"
+          >XPLORA</span
+        >
+        safaris
       </p>
-    </div>
-  </form>
+      <p class="text-center">We make trips happen!</p>
+      <div *ngIf="showSuccess">
+        <img src="https://i.gifer.com/7efs.gif" alt="" />
+        <p class="text-green-600 text-center font-bold">
+          You have registered Successfully!!
+        </p>
+      </div>
+      <div class="mb-4">
+        <label
+          class="block text-gray-700 text-sm font-bold mb-2"
+          for="full name"
+        >
+          Full Name
+        </label>
+        <input
+          class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+          formControlName="full_name"
+          type="text"
+          placeholder="Full Name"
+        />
+        <span
+          id="fname-error"
+          class="text-[12px] text-red-500"
+          *ngIf="
+            buttonClicked &&
+            registrationForm?.get('full_name')?.hasError('required')
+          "
+          >*Required</span
+        >
+      </div>
+      <div class="mb-4">
+        <label
+          class="block text-gray-700 text-sm font-bold mb-2"
+          for="phone_number"
+        >
+          Phone Number
+        </label>
+        <input
+          class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+          formControlName="phone_number"
+          type="text"
+          placeholder="+234 70000000"
+        />
+        <span
+          id="phone-error"
+          class="text-[12px] text-red-500"
+          *ngIf="
+            buttonClicked &&
+            registrationForm?.get('phone_number')?.hasError('required')
+          "
+          >*Required</span
+        >
+      </div>
+      <div class="mb-4">
+        <label class="block text-gray-700 text-sm font-bold mb-2" for="email">
+          Email address
+        </label>
+        <input
+          class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+          formControlName="email"
+          type="text"
+          placeholder="Username"
+        />
+        <span
+          class="text-[12px] text-red-500"
+          *ngIf="
+            buttonClicked &&
+            registrationForm?.get('email')?.hasError('required')
+          "
+        >
+          *Required
+        </span>
+      </div>
+      <div class="mb-6">
+        <label
+          class="block text-gray-700 text-sm font-bold mb-2"
+          for="password"
+        >
+          Password
+        </label>
+        <input
+          class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+          formControlName="password"
+          type="password"
+          placeholder="******************"
+        />
+        <span
+          id="password-error"
+          class="text-[12px] text-red-500"
+          *ngIf="
+            buttonClicked &&
+            registrationForm?.get('password')?.hasError('required')
+          "
+          >*Required</span
+        >
+      </div>
+      <!-- <div class="mb-6">
+        <label
+          class="block text-gray-700 text-sm font-bold mb-2"
+          for="confirm password"
+        >
+          Confirm Password
+        </label>
+        <input
+          class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+          id="login-password"
+          type="password"
+          placeholder="******************"
+        />
+        <span id="password-error" class="text-[12px] text-red-500"></span>
+      </div> -->
+      <div class="flex items-center justify-between mt-10">
+        <button
+          class="bg-orange-500 hover:bg-orange-200 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+          type="submit"
+        >
+          Create Account
+        </button>
+        <p>
+          Already registered?
+          <a
+            routerLink="/login"
+            class="inline-block align-baseline font-bold text-sm text-orange-500 hover:text-orange-500"
+            >LogIn
+          </a>
+        </p>
+      </div>
+    </form>
+  </div>
 </div>

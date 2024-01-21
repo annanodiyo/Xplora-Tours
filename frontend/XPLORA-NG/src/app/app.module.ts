@@ -8,13 +8,31 @@ import { RegistrationComponent } from './registration/registration.component';
 import { HttpClientModule } from '@angular/common/http';
 import { LoginComponent } from './login/login.component';
 import { LandingPageComponent } from './landing-page/landing-page.component';
-import { LandingComponent } from './landing/landing.component';
 import { DestinationsComponent } from './destinations/destinations.component';
 import { NotfoundComponent } from './notfound/notfound.component';
 import { FooterComponent } from './footer/footer.component';
+import { AdminComponent } from './admin/admin.component';
+import { AsidebarComponent } from './asidebar/asidebar.component';
+import { UsersComponent } from './users/users.component';
+import { CreateToursComponent } from './create-tours/create-tours.component';
+import { ToursComponent } from './tours/tours.component';
 
 @NgModule({
-  declarations: [AppComponent, NavbarComponent, RegistrationComponent, LoginComponent, LandingPageComponent, LandingComponent, DestinationsComponent, NotfoundComponent, FooterComponent],
+  declarations: [
+    AppComponent,
+    NavbarComponent,
+    RegistrationComponent,
+    LoginComponent,
+    LandingPageComponent,
+    DestinationsComponent,
+    NotfoundComponent,
+    FooterComponent,
+    AdminComponent,
+    AsidebarComponent,
+    UsersComponent,
+    CreateToursComponent,
+    ToursComponent,
+  ],
   imports: [
     BrowserModule,
     AppRoutingModule,

@@ -1,5 +1,5 @@
 <app-navbar></app-navbar>
-<div class="w-[50vw] h-[70vh] mx-auto flex justify-center mt-20">
+<div class="w-[50vw] h-[70vh] mx-auto flex justify-center items-center mt-20">
   <div>
     <img
       src="https://cdn.pixabay.com/photo/2012/05/07/12/58/giraffe-48386_640.png"
@@ -8,9 +8,8 @@
   </div>
   <form
     [formGroup]="loginForm"
-    (ngSubmit=""
-    )
-    class="w-[70vw] bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4"
+    (ngSubmit)="loginUser()"
+    class="w-1/3 max-h-[40vh] bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4"
   >
     <div class="mb-4">
       <img
@@ -19,7 +18,9 @@
         class="w-100"
       />
     </div>
-    <p class="text-center font-bold">Welcome to Xplora safaris</p>
+    <p class="text-center font-bold"><span class="logo text-2xl drop-shadow-lg" style="font-family: 'Fraunces', serif">XPLORA</span>
+ safaris</p>
+ <p class="text-center">We make trips happen!</p>
     <div class="mb-[10px] mt-[20px]">
       <label class="block text-gray-700 text-sm font-bold mb-2" for="email">
         Email address
@@ -29,6 +30,7 @@
         id="login-email"
         type="text"
         placeholder="Username"
+        formControlName="email"
       />
       <span id="email-error" class="text-[12px] text-red-500"></span>
     </div>
@@ -41,6 +43,7 @@
         id="login-password"
         type="password"
         placeholder="******************"
+        formControlName="password"
       />
       <span id="password-error" class="text-[12px] text-red-500"></span>
     </div>

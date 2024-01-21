@@ -1,0 +1,54 @@
+<div class="flex">
+  <div
+    class="flex flex-col items-left px-8 py-10 bg-orange-200 w-[20vw] h-[100vh]"
+  >
+    <div>
+      <img
+        src="https://image.shutterstock.com/image-vector/default-avatar-profile-icon-grey-260nw-518740768.jpg"
+        class="rounded-full object-cover h-16 w-16"
+        alt=""
+      />
+
+      <!-- <h1>Welcome <span>{{}}</span></h1> -->
+      <nav>
+        <a routerLink="/update" routerLinkActive="active">Manage Tours</a>
+        <br />
+        <a routerLink="/profiles" routerLinkActive="active">Manage Profiles</a>
+        <br />
+
+        <a routerLink="/user-accounts" routerLinkActive="active"
+          >User Accounts</a
+        >
+        <br />
+
+        <a routerLink="/user-accounts" routerLinkActive="active">My Profile</a>
+        <br />
+        <a routerLink="" routerLinkActive="active">LogOut</a>
+      </nav>
+    </div>
+  </div>
+  <div class="users ml-20 mt-20">
+    <table id="userDetails" class="text-left">
+      <thead>
+        <tr>
+          <th class="-6">#</th>
+          <th style="width: 150px">Full Name</th>
+          <th style="width: 200px">Email</th>
+          <th style="width: 150px">Phone Number</th>
+          <th style="width: 80px">Role</th>
+          <!-- <th style="width: 80px">Status</th> -->
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let user of allusers; let i = index">
+          <td style="padding-right: 10px">{{ i + 1 }}</td>
+          <td style="width: 150px">{{ user.full_name | titlecase }}</td>
+          <td style="width: 200px">{{ user.email | lowercase }}</td>
+          <td style="width: 150px">{{ user.phone_number }}</td>
+          <td style="width: 80px">{{ user.role }}</td>
+          <!-- <td style="width: 80px">{{ user.is_Deleted }}</td> -->
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
