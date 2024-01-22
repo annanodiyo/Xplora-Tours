@@ -102,12 +102,15 @@
         >
           Password
         </label>
-        <input
+        <!-- <input
           class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
           formControlName="password"
           type="password"
           placeholder="******************"
-        />
+        /> -->
+        <input type="{{ showPassword ? 'text' : 'password' }}" id="password" name="password" [(ngModel)]="password" required>
+        <button (click)="togglePassword()">Toggle Password</button>
+
         <span
           id="password-error"
           class="text-[12px] text-red-500"

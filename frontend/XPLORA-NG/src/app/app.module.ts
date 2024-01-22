@@ -16,6 +16,9 @@ import { AsidebarComponent } from './asidebar/asidebar.component';
 import { UsersComponent } from './users/users.component';
 import { CreateToursComponent } from './create-tours/create-tours.component';
 import { ToursComponent } from './tours/tours.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
+import { IonicModule } from '@ionic/angular';
+
 
 @NgModule({
   declarations: [
@@ -32,6 +35,8 @@ import { ToursComponent } from './tours/tours.component';
     UsersComponent,
     CreateToursComponent,
     ToursComponent,
+    DashboardComponent,
+
   ],
   imports: [
     BrowserModule,
@@ -39,6 +44,7 @@ import { ToursComponent } from './tours/tours.component';
     ReactiveFormsModule,
     FormsModule,
     HttpClientModule,
+    IonicModule.forRoot({}),
   ],
   providers: [],
   bootstrap: [AppComponent],

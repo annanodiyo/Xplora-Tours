@@ -13,6 +13,8 @@ export class RegistrationComponent {
   registrationForm!: FormGroup;
   buttonClicked: boolean = false;
   showSuccess: boolean = false;
+  showPassword:boolean = false;
+  password: string='';
   constructor(
     private authService: AuthService,
     private formBuilder: FormBuilder,
@@ -43,5 +45,9 @@ export class RegistrationComponent {
       console.log('Form is invalid. Please fill in all required fields');
       // alert('Form is invalid. Please fill in all reqired fields');
     }
+  }
+
+  togglePassword(){
+    this.showPassword =!this.showPassword
   }
 }
